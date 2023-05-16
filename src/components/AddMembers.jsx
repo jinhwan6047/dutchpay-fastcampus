@@ -25,6 +25,7 @@ export default function AddMembers() {
       handleSubmit={handleSubmit}
     >
       <InputTags
+        data-testid="input-member-names"
         placeholder="이름 간 띄어 쓰기"
         onTags={(value) => setGroupMembers(value.values)}
       />

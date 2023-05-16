@@ -2,10 +2,15 @@ import { render, screen } from "@testing-library/react";
 import { RecoilRoot } from "recoil";
 import ExpenseMain from "./ExpenseMain";
 import userEvent from "@testing-library/user-event";
+import { groupMembersState } from "../state/groupMembers";
 
 const renderComponent = () => {
   render(
-    <RecoilRoot>
+    <RecoilRoot
+      initializeState={(snap) => {
+        snap.set(groupMembersState, ["영수", "영희"]);
+      }}
+    >
       <ExpenseMain />
     </RecoilRoot>
   );
@@ -13,7 +18,7 @@ const renderComponent = () => {
   const dateInput = screen.getByPlaceholderText(/결제한 날짜/i);
   const descInput = screen.getByPlaceholderText(/비용에 대한 설명/i);
   const amountInput = screen.getByPlaceholderText(/비용은 얼마/i);
-  const payerInput = screen.getByPlaceholderText(/누가 결재/i);
+  const payerInput = screen.getByDisplayValue(/누가 결재/i);
   const addButton = screen.getByText("추가하기");
 
   return {
